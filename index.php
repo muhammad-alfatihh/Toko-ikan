@@ -8,7 +8,7 @@
 <body>
    
 
-    <form action="create.php" method="POST">
+    <form action="index.php" method="POST">
         <label for="nama_ikan">Nama Ikan:</label>
         <input type="text" name="nama_ikan" id="nama_ikan"> <br>
 
@@ -26,8 +26,23 @@
             <option value="Konsumsi Air Laut">Konsumsi Air Laut</option>
         </select> <br>
 
-        <button type="submit">Add</button>
+        <button type="submit" name="submitIkan">Add</button>
     </form>
 
 </body>
 </html>
+
+<?php
+    include 'db.php';
+    if (isset($_POST["submitIkan"])) {
+        $nama_ikan = $_POST["nama_ikan"];
+        $harga = $_POST["harga"];
+        $stok = $_POST["stok"];
+        $kategori = $_POST["kategori"];
+        $sql = "insert into data_ikan (nama_ikan, harga, stok, kategori) values ('$nama_ikan', '$harga', '$stok', '$kategori')";
+        $conn->query($sql);
+        $conn->close();
+        header("location: index.php");
+    }
+    
+?>
